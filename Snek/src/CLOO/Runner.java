@@ -2,6 +2,7 @@
 package CLOO;
 
 import java.util.ArrayList;
+import java.awt.Container;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -54,7 +55,7 @@ public class Runner {
         // panel for where the board draws
 		JPanel thepanel = new JPanel();
         thepanel.setBounds(0, 0, 400, 400);
-        thepanel.add(new Board(snake,food));
+        frame.add(thepanel, new Board(snake, food));
         frame.getContentPane().add(thepanel);
 		//up
 		JButton btnUp = new JButton("U");
@@ -72,7 +73,7 @@ public class Runner {
 					}
 				}
                 snake.remove(0); //removes the end/front of list to give the effect that the block(s) moved
-				thepanel.add(new Board(snake,food)); // updates gui
+				frame.setContentPane((Container)thepanel.add(new Board(snake,food))); // updates gui
 				playagain();
 			}
 		});
@@ -94,7 +95,7 @@ public class Runner {
 					}
 				}
                 snake.remove(0);
-				thepanel.add(new Board(snake,food));
+				frame.setContentPane((Container)thepanel.add(new Board(snake,food)));
 				playagain();
 			}
 		});
@@ -116,7 +117,7 @@ public class Runner {
 					}
 				}
                 snake.remove(0);
-				thepanel.add(new Board(snake,food));
+				frame.setContentPane((Container)thepanel.add(new Board(snake,food)));
 				playagain();
 			}
 		});
@@ -138,7 +139,7 @@ public class Runner {
 					}
 				}
                 snake.remove(0);
-				thepanel.add(new Board(snake,food));
+				frame.setContentPane((Container)thepanel.add(new Board(snake,food)));
 				playagain();
 			}
 		});
