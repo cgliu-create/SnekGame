@@ -121,6 +121,7 @@ public class Grid extends JPanel implements Runnable
          food.remove(0);
          generateRandomFood();
          if(yum.getColor() == Color.BLUE ){
+            // if blue food is "eaten" the snake teleports to and moves away from what was the tail
             head = snake.get(0);
             Square test = snake.get(1);
             if(test.getY()<head.getY()){
@@ -136,14 +137,19 @@ public class Grid extends JPanel implements Runnable
                setmovingLeft();
             }
          }
+         if(yum.getColor() == Color.YELLOW ){
+            head.setColor(Color.YELLOW);
+         }
       }
       return head;
    }
    public void generateRandomFood(){
-      // Blue = funky, Red = normal extend
-      int x = (int)(Math.random()*2);
-      if(x==1){
+      // Blue = teleport , Red = normal, Yellow = immortal
+      int x = (int)(Math.random()*6);
+      if(x==1||x==2){
       grow(new Square((squareWIDTH*(int)(Math.random()*(WIDTH/squareWIDTH-1))),squareHEIGHT*(int)(Math.random()*(HEIGHT/squareHEIGHT-1)), Color.BLUE), false);
+      } else if(x==3||x==4){
+      grow(new Square((squareWIDTH*(int)(Math.random()*(WIDTH/squareWIDTH-1))),squareHEIGHT*(int)(Math.random()*(HEIGHT/squareHEIGHT-1)), Color.YELLOW), false);
       } else {
       grow(new Square((squareWIDTH*(int)(Math.random()*(WIDTH/squareWIDTH-1))),squareHEIGHT*(int)(Math.random()*(HEIGHT/squareHEIGHT-1)), Color.RED), false);
       }
@@ -178,26 +184,38 @@ public class Grid extends JPanel implements Runnable
       {
       }
    }	
+   public boolean checkForYellow(){
+      // immortal yellow 
+      for (Square b : snake) {
+         if(b.getColor() == Color.YELLOW)
+            return true;
+      }
+      return false;
+   }
    // checks if the snake "head" overlaps its "body"
    public boolean checkSelfCollision(Square s){
-      int count = 0;
-      for (Square b : snake) {
-         if(b.equals(s))
-            count++;
+      if(!(checkForYellow())){
+         int count = 0;
+         for (Square b : snake) {
+            if(b.equals(s))
+               count++;
+         }
+         if(count == 2)
+            return true;
       }
-      if(count == 2)
-         return true;
       return false;
    }
    // checks if the head of the snake is out of bounds
-   public boolean checkOutOfBounds(Square s){
-      if(s.getX()>WIDTH || s.getX()<0 ||s.getY()>HEIGHT||s.getY()<0)
+   public boolean checkOutOfBounds(){
+      for (Square s : snake) {
+         if(s.getX()>WIDTH || s.getX()<0 ||s.getY()>HEIGHT||s.getY()<0)
          return true;
+      }
       return false;
    }
    // game over popup
    public void playagain(Square head) {
-    if(checkSelfCollision(head) || checkOutOfBounds(head)){
+    if(checkSelfCollision(head) || checkOutOfBounds()){
        JFrame end = new JFrame();
        JOptionPane.showMessageDialog(end, "Game Over");
        String again = JOptionPane.showInputDialog(end, "Would you like to play again");
