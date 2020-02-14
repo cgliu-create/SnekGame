@@ -21,8 +21,6 @@ public class Runner extends JFrame implements KeyListener {
 	public static void main(String args[]) {
 		Runner run = new Runner();
 	}
-//https://stackoverflow.com/questions/9333876/how-to-simply-implement-a-keylistener
-//https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}

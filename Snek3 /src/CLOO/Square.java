@@ -22,9 +22,8 @@ public class Square {
    	return type;
     }
     public void setColor(Color c){
-         type = c;
-     }
-
+        type = c;
+    }
     public boolean equals(Object thing){
         Square other = (Square)thing;
         if(this.xPos == other.xPos && this.yPos == other.yPos){
