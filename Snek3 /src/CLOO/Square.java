@@ -21,6 +21,9 @@ public class Square {
     public Color getColor(){
    	return type;
     }
+    public void setColor(Color c){
+         type = c;
+     }
 
     public boolean equals(Object thing){
         Square other = (Square)thing;
