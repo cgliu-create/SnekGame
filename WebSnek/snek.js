@@ -115,3 +115,18 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     });
 });
+
+document.addEventListener("keydown", function(event) {
+    if (event.key == "ArrowLeft") {
+        turnLeft();
+    }
+    if (event.key == "ArrowRight") {
+        turnRight();
+    }
+    if (event.key == "ArrowDown") {
+        turnDown();
+    }
+    if (event.key == "ArrowUp") {
+        turnUp();
+    }
+});
