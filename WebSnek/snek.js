@@ -102,7 +102,13 @@ function animate(){
         }
     }
 }
-    
+
+function reset(){
+    snake = [new coordinate(0, 0)];
+    food = [new coordinate(5, 5)];
+    alive = true;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     setInterval(animate, 500);
     document.querySelectorAll(".control").forEach(function(button){
@@ -112,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (dir == 'right'){ turnRight();}
             if (dir == 'down'){ turnDown();}
             if (dir == 'up'){ turnUp();}
+            if (dir == 'reset'){ reset();}
         };
     });
 });
